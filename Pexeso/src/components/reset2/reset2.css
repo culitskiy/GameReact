@@ -1,0 +1,26 @@
+.reset{
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    padding: .8em 1em calc(.8em + 3px);
+    border-radius: 4px;
+    background: rgb(64,199,129);
+    box-shadow: 0 -3px rgb(53,167,110) inset;
+    transition: 0.2s;
+    outline: none;
+}
+.reset:hover { 
+    background: rgb(53, 167, 110);
+    outline: none;
+   }
+  .reset:active {
+    background: rgb(33,147,90);
+    box-shadow: 0 3px rgb(33,147,90) inset;
+    outline: none;
+  }
+
+.res{
+  display: flex;
+  justify-content: center;
+}

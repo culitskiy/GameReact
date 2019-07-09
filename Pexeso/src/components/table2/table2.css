@@ -1,0 +1,16 @@
+.table {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid black;
+    margin:50px auto;
+    width: 800px;
+    height: 800px;
+    overflow: hidden;
+    flex-wrap: wrap;
+    overflow: hidden;
+    
+    
+}
+.table: {
+
+}
