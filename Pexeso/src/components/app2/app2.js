@@ -38,9 +38,6 @@ export default class App2 extends React.Component {
             });
         }
     }
-    // componentDidMount(){
-    //     setInterval(this.timer(), 1000);
-    // }
 
     
     closeCard = (i,y) => {

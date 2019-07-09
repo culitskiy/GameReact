@@ -21,56 +21,24 @@ class App3 extends React.Component{
   }
 
   onDirection = (e) => {
-    console.log(e);
-    let snake = this.state.snake;
+    
+    let snake = [...this.state.snake];
     switch(e.keyCode){
       case 38:
         if(snake[snake.length - 1][0] !== snake[snake.length - 2][0]){
           this.setState({direction: 'up'});}
-        // if(snake[snake.length -1][1] < snake[0][1]
-        //   && snake[snake.length - 1][0] === snake[snake.length - 2][0]
-        //    ){snake.reverse();}
-        //    if( snake[0][0] !== snake[1][0]){
-        //     this.setState({direction: 'down'});
-        //    }
-        
         break;
       case 37:
         if(snake[snake.length - 1][1] !== snake[snake.length - 2][1]){
           this.setState({direction: 'left'});}
-
-        // if(snake[0][0] < snake[snake.length - 1][0]
-        //    && snake[snake.length - 1][1] === snake[snake.length - 2][1]
-        //    )
-        //      {snake.reverse();}
-        //      if(snake[0][1] !== snake[1][1]){
-        //       this.setState({direction: 'right'});
-        //      }
-        
         break;
       case 39:
         if(snake[snake.length - 1][1] !== snake[snake.length - 2][1]){
           this.setState({direction: 'right'});}
-        // if(snake[snake.length -1][0] < snake[0][0]
-        //   && snake[snake.length - 1][1] === snake[snake.length - 2][1]
-        //  )
-        //   {snake.reverse();}
-        //   if( snake[0][1] !== snake[1][1]){
-        //     this.setState({direction: 'left'});
-        //   }
-        
         break;
       case 40: 
       if(snake[snake.length - 1][0] !== snake[snake.length - 2][0]){
       this.setState({direction: 'down'});}
-        // if(snake[0][1] < snake[snake.length - 1][1]
-        //   && snake[snake.length - 1][0] === snake[snake.length - 2][0]
-        //   )
-        //    { snake.reverse();}
-        //    if(snake[0][0] !== snake[1][0]){
-        //     this.setState({direction: 'up'});
-        //    }
-       
         break;
       default:
         this.setState({direction: '0'});
@@ -79,56 +47,29 @@ class App3 extends React.Component{
   }
 
   move = () => {
-    let snake = this.state.snake;
+    let snake = [...this.state.snake];
 
     const right = () => {
-      // if(snake[snake.length -1][0] < snake[0][0]
-      //   && (snake[snake.length - 1][1] === snake[snake.length - 2][1]
-      //     )
-        
-      //   ){
-      //   snake.reverse();
-      // }
+      
       snake.push([snake[snake.length - 1][0] + 1,snake[snake.length - 1][1]]);
         snake.splice(0,1);
     }
     const left = () => {
-      // if(
-     
-      //  snake[0][0] < snake[snake.length - 1][0]
-      //   && (snake[snake.length - 1][1] === snake[snake.length - 2][1]
-      //     )){
-        
-      //   snake.reverse();}
+
         snake.push([snake[snake.length - 1][0] - 1,snake[snake.length - 1][1]])
         snake.splice(0,1);
-      // } else{
-      //   snake.push([snake[snake.length - 1][0] - 1,snake[snake.length - 1][1]])
-      //   snake.splice(0,1);
-      // }
+      
     }
     const up = () => {
-      // if(snake[snake.length -1][1] < snake[0][1]
-      //   && 
-      //     snake[snake.length - 1][0] === snake[snake.length - 2][0]
-       
-      //    ){
-      //   snake.reverse();
-      // }
+      
       snake.push([snake[snake.length - 1][0],snake[snake.length - 1][1] + 1]);
       snake.splice(0,1);
     }
     const down = () => {
-      // if(
       
-      //  snake[0][1] < snake[snake.length - 1][1]
-      //  && 
-      //   snake[snake.length - 1][0] === snake[snake.length - 2][0]){
-       
-      //   snake.reverse();}
         snake.push([snake[snake.length - 1][0],snake[snake.length - 1][1] - 1])
         snake.splice(0,1);
-        console.log('if');
+       
    
     }
     switch(this.state.direction){
@@ -161,7 +102,7 @@ class App3 extends React.Component{
       random = Math.round(random);
       return random;
     };
-    let applesArr = this.state.apples;
+    
    const x = randomApples();
    const y = randomApples();
 
@@ -171,7 +112,7 @@ class App3 extends React.Component{
   }
 
   checkEat = () => {
-    let snake = this.state.snake;
+    let snake = [...this.state.snake];
     const apple = this.state.apples;
 
     if(snake.some((el) => {
@@ -182,24 +123,18 @@ class App3 extends React.Component{
           snake: snake
         })
 
-    // if(snake[snake.length - 1][0] === apple[0] 
-    //   && snake[snake.length - 1][1] === apple[1]){
-    //     snake.splice(0,0,apple);
-    //     this.setState({
-    //       snake: snake
-    //     })
         this.apples();
       }
   }
 
   checkCrash = (int) => {
-    const snake = this.state.snake;
+    const snake = [...this.state.snake];
     const up = snake[snake.length - 1][1] > this.state.field.length;
     const down = snake[snake.length - 1][1] < 1;
     const right = snake[snake.length - 1][0] > this.state.field[0].length;
     const left = snake[snake.length - 1][0] < 1;
     const snakeArr = snake.slice(0,snake.length - 2);
-    console.log(snakeArr);
+    
     const self = snakeArr.some((el) => {
       return el[0] === snake[snake.length - 1][0] && el[1] === snake[snake.length - 1][1];
     })
@@ -249,7 +184,7 @@ class App3 extends React.Component{
     const column = this.state.field.map((el,i) => {
       return(
         <div  >
-        <Column3 snake={this.state.snake} apples={this.state.apples} col={el} x={i+1}/>
+        <Column3 snake={this.state.snake} key={Date.now()} apples={this.state.apples} col={el} x={i+1}/>
         
         </div>
       )
