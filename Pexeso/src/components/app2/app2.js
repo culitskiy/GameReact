@@ -6,6 +6,7 @@ import { Reset } from '../reset2/reset2';
 import swal from 'sweetalert';
 import Timer from '../timer/timer';
 
+export const UserContext = React.createContext();
 
 export default class App2 extends React.Component {
     constructor(props){
@@ -38,6 +39,9 @@ export default class App2 extends React.Component {
             });
         }
     }
+    // componentDidMount(){
+    //     setInterval(this.timer(), 1000);
+    // }
 
     
     closeCard = (i,y) => {
@@ -114,11 +118,16 @@ export default class App2 extends React.Component {
     };
 
     cellClick = (i) => {
-        const card = [...this.state.card];
-        card[i][1] = this.state.card[i][1] === 0 ? 1: 0;
-        this.setState({
-            card
+        const openCard = this.state.card.filter((el) => el[1] === 1);
+        if (this.state.card[i][1] !== 1 &&
+            this.state.card[i][1] !== 2 &&
+            openCard.length < 2) {
+            const card = [...this.state.card];
+            card[i][1] = this.state.card[i][1] === 0 ? 1 : 0;
+            this.setState({
+                card
             });
+        }
         setTimeout(() => {this.check()},3000);
         setTimeout(() => {this.player()},3000);
         setTimeout(() => {this.checlWin()}, 3000);
@@ -165,8 +174,9 @@ export default class App2 extends React.Component {
                 <div className='playerPanel'>{this.playerPanel()}</div>
                 <div className='pointCounter'><PointCounterPanel player1={this.state.player1Point} player2={this.state.player2Point}/></div>
                </div>
-                <div><Table cellClick={this.cellClick} data={this.state.card}/></div>
-                
+               <UserContext.Provider value={{cellClick: this.cellClick}}>
+                <div><Table  data={this.state.card}/></div>
+                </UserContext.Provider>
             </div>
         )
     }
