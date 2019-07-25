@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './cell2.css';
-// import img from '../../img/0.png';
+import {UserContext} from '../app2/app2';
 
 
-export const Cell = ({data, i, el, cellClick}) => {
 
+export const Cell = ({data, i, el}) => {
+
+    const {cellClick} = useContext(UserContext);
    let imgChange = (data) => {
     
        if (data === 1){
